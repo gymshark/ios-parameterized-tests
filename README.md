@@ -5,11 +5,21 @@
 # XCTSharkParameterized
 
 <div>
-  <img alt="Static Badge" src="https://img.shields.io/badge/build-1.0.0-brightgreen?style=for-the-badge&label=ver&labelColor=545454&color=44cb11">
-  <img alt="Static Badge" src="https://img.shields.io/badge/build-5.9-brightgreen?style=for-the-badge&label=Swift&labelColor=545454&color=eb7a3c">
-  <img alt="Static Badge" src="https://img.shields.io/badge/build-15.0-brightgreen?style=for-the-badge&label=Xcode&labelColor=545454&color=18a0ec">
-  <img alt="Static Badge" src="https://img.shields.io/badge/build-MIT-brightgreen?style=for-the-badge&label=License&labelColor=545454&color=90bd11">
+    <a href="https://github.com/gymshark/ios-parameterized-tests"><img alt="Version" src="https://img.shields.io/badge/build-1.0.0-brightgreen?style=for-the-badge&label=ver&labelColor=545454&color=44cb11"></a>
+    <a href="https://www.swift.org/"><img alt="Swift 5.9+" src="https://img.shields.io/badge/build-5.9+-brightgreen?style=for-the-badge&label=Swift&labelColor=545454&color=eb7a3c"></a>
+    <a href="https://developer.apple.com/xcode/"><img alt="Xcode 15+" src="https://img.shields.io/badge/build-15.0+-brightgreen?style=for-the-badge&label=Xcode&labelColor=545454&color=18a0ec"></a>
+    <a href="https://github.com/gymshark/ios-parameterized-tests?tab=MIT-1-ov-file"><img alt="MIT" src="https://img.shields.io/badge/build-MIT-brightgreen?style=for-the-badge&label=License&labelColor=545454&color=90bd11"></a>
 </div>
+
+## Table of contents
+
+- [Summary](https://github.com/gymshark/ios-parameterized-tests?tab=readme-ov-file#summary)
+- [Requirements](https://github.com/gymshark/ios-parameterized-tests?tab=readme-ov-file#requirements)
+- [Installation](https://github.com/gymshark/ios-parameterized-tests?tab=readme-ov-file#installation)
+    - [SPM](https://github.com/gymshark/ios-parameterized-tests?tab=readme-ov-file#swift-package-manager)
+    - [Package](https://github.com/gymshark/ios-parameterized-tests?tab=readme-ov-file#adding-it-to-a-package)
+- [Examples without the package](https://github.com/gymshark/ios-parameterized-tests?tab=readme-ov-file#examples-reason-why-we-need-it)
+- [Examples using the package](https://github.com/gymshark/ios-parameterized-tests?tab=readme-ov-file#examples-how-to-use-xctsharkparameterized)
 
 ## Summary
 
@@ -22,8 +32,6 @@ Swift 5.9 or later
 
 ## Installation
 
-**Xcode project**
-
 #### Swift Package Manager
 
 1. In Xcode, navigate in menu: File > Swift Packages > Add Package Dependency
@@ -31,10 +39,14 @@ Swift 5.9 or later
 3. For the Dependency Rule, Select "Up to Next Major" with `1.0.0`. Click Add Package.
 4. Under `Package Product` look for XCTSharkParameterized and under `Target` select your test target.
 5. Click Add Package.
-   
+
+<p align="left">
+    <img src="./Resources/spm_add.png" alt="logo" width="480">
+</p>
+
 #### Adding it to a package
 
-In `Package.swift` add:
+1. In `Package.swift` add:
 
 ``` swift
     dependencies: [
@@ -43,7 +55,7 @@ In `Package.swift` add:
     ]
 ```
 
-and then add the product to your test target.
+2. Add the product to your test target again inside `Package.swift`
 
 ```swift
     .testTarget(
