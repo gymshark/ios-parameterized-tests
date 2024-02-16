@@ -12,11 +12,7 @@ let package = Package(
         .library(
             name: "XCTShark",
             targets: ["XCTShark"]
-        ),
-        .executable(
-            name: "XCTSharkClient",
-            targets: ["XCTSharkClient"]
-        ),
+        )
     ],
     dependencies: [
         // Depend on the Swift 5.9 release of SwiftSyntax
