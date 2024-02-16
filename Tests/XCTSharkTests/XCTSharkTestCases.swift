@@ -6,12 +6,12 @@
 //
 
 import Foundation
-import XCTShark
+import XCTSharkParameterized
 import XCTest
 
 final class XCTSharkTestCases: XCTestCase {
     
-    @InlineData(["www.gymshark.com"])
+    @InlineData(["www.gymashark.com"])
     func testURLValue(value: [String]) throws {
         let url = URLRequest(url: URL(string: "www.gymshark.com")!)
         

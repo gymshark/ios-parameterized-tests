@@ -5,13 +5,13 @@ import PackageDescription
 import CompilerPluginSupport
 
 let package = Package(
-    name: "XCTShark",
+    name: "XCTSharkParameterized",
     platforms: [.macOS(.v10_15), .iOS(.v13), .tvOS(.v13), .watchOS(.v6), .macCatalyst(.v13)],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "XCTShark",
-            targets: ["XCTShark"]
+            name: "XCTSharkParameterized",
+            targets: ["XCTSharkParameterized"]
         )
     ],
     dependencies: [
@@ -31,10 +31,10 @@ let package = Package(
         ),
 
         // Library that exposes a macro as part of its API, which is used in client programs.
-        .target(name: "XCTShark", dependencies: ["XCTSharkMacros"]),
+        .target(name: "XCTSharkParameterized", dependencies: ["XCTSharkMacros"]),
 
         // A client of the library, which is able to use the macro in its own code.
-        .executableTarget(name: "XCTSharkClient", dependencies: ["XCTShark"]),
+        .executableTarget(name: "XCTSharkClient", dependencies: ["XCTSharkParameterized"]),
 
         // A test target used to develop the macro implementation.
         .testTarget(

@@ -2,7 +2,7 @@
     <img src="./Resources/gymshark_dark.png" alt="logo" width="300" height="300">
 </p>
 
-# XCTShark
+# XCTSharkParameterized
 
 <div>
   <img alt="Static Badge" src="https://img.shields.io/badge/build-1.0.0-brightgreen?style=for-the-badge&label=ver&labelColor=545454&color=44cb11">
@@ -29,7 +29,7 @@ Swift 5.9 or later
 1. In Xcode, navigate in menu: File > Swift Packages > Add Package Dependency
 2. Add `https://github.com/gymshark/ios-parameterized-tests.git`
 3. For the Dependency Rule, Select "Up to Next Major" with `1.0.0`. Click Add Package.
-4. Under `Package Product` look for XCTShark and under `Target` select your test target.
+4. Under `Package Product` look for XCTSharkParameterized and under `Target` select your test target.
 5. Click Add Package.
    
 #### Adding it to a package
@@ -50,7 +50,7 @@ and then add the product to your test target.
         name: <Your Test Target>,
         dependencies: [
             ...
-            .product(name: "XCTShark", package: "XCTShark"),
+            .product(name: "XCTSharkParameterized", package: "XCTSharkParameterized"),
         ]
     )
 ```
@@ -140,12 +140,12 @@ func testConcatenate() throws {
     }
 }
 ```
-- Now that we've seen the other ways of doing it how about we jump right in and I show you how you can do it using XCTShark
+- Now that we've seen the other ways of doing it how about we jump right in and I show you how you can do it using XCTSharkParameterized
 
-## Examples [How to use XCTShark]
+## Examples [How to use XCTSharkParameterized]
 
 ```swift
-import XCTShark
+import XCTSharkParameterized
 
 public class StringUtilsTests: XCTestCase {
     @InlineData("Hello", "World", "HelloWorld")
@@ -197,7 +197,7 @@ public class StringUtilsTests: XCTestCase {
 
 - If you would like to give the method a specific name as long strings could end up giving the method name an unreadable name.
 ```swift
-import XCTShark
+import XCTSharkParameterized
 
 public class StringUtilsTests: XCTestCase {
     @InlineData("Hello", "World", "HelloWorld", label: "_Verify_HelloWorld")
