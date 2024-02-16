@@ -24,28 +24,204 @@ Swift 5.9 or later
 
 **Xcode project**
 
-If you are using Xcode open `File -> Add Package Dependencies...` and enter url `https://github.com/gymshark/ios-parameterized-tests`
+#### Swift Package Manager
 
-**Swift package manager**
+1. In Xcode, navigate in menu: File > Swift Packages > Add Package Dependency
+2. Add `https://github.com/gymshark/ios-parameterized-tests.git`
+3. For the Dependency Rule, Select "Up to Next Major" with `1.0.0`. Click Add Package.
+4. Under `Package Product` look for XCTShark and under `Target` select your test target.
+5. Click Add Package.
+   
+#### Adding it to a package
 
 In `Package.swift` add:
 
 ``` swift
-dependencies: [
-  .package(url: "https://github.com/gymshark/ios-parameterized-tests", branch: "main")
-]
+    dependencies: [
+        ...
+      .package(url: "https://github.com/gymshark/ios-parameterized-tests", branch: "1.0.0")
+    ]
 ```
 
 and then add the product to your test target.
 
 ```swift
-.product(name: "XCTShark", package: "XCTShark"),
+    .testTarget(
+        name: <Your Test Target>,
+        dependencies: [
+            ...
+            .product(name: "XCTShark", package: "XCTShark"),
+        ]
+    )
 ```
 
-and import it in your UnitTest file
+## Examples [Reason why we need it]
+
+- Let's say you would like to concatanate some strings and you would like to test the outcomes.
+```swift
+public class StringUtils {
+
+    func concatenate(a: String, b: String) -> String {
+        return a + b;
+    }
+    
+}
+```
+
+- Traditionaly in order to `UnitTest` the above with multiple provided strings it would look something like the below.  It tests, it's readable and more importantly it passes, but the main problem here is if you need to write multiple checks, now image the same thing but for different `Util` classes and so on. You can image how much code will end up being duplicated.
+```swift
+    func testHellWorld() throws {
+        // Arrange
+        let util = StringUtils()
+        let a = "Hello"
+        let b = "World"
+        
+        // Act
+        let result = util.concatenate(a: a, b: b)
+        
+        // Assert
+        XCTAssertEqual(result, "HelloWorld")
+    }
+    
+    func testOpenAI() throws {
+        // Arrange
+        let util = StringUtils()
+        let a = "Open"
+        let b = "AI"
+        
+        // Act
+        let result = util.concatenate(a: a, b: b)
+        
+        // Assert
+        XCTAssertEqual(result, "OpenAI")
+    }
+}
+```
+
+### OR
+
+```swift
+func testConcatenate() throws {
+        // Arrange
+        let stringUtils = StringUtils()
+        let testCases: [(String, String, String)] = [
+            ("Hello", "World", "HelloWorld"),
+            ("Open", "AI", "OpenAI"),
+            ("", "Test", "Test")
+        ]
+
+        // Act & Assert
+        for (a, b, expectedResult) in testCases {
+            let result = stringUtils.concatenate(a: a, b: b)
+            XCTAssertEqual(expectedResult, result)
+        }
+    }
+```
+
+### OR
+
+```swift
+ func testConcatenate() throws {
+        // Arrange
+        let stringUtils = StringUtils()
+        
+        // Act & Assert for each test case
+        performConcatenationTest(stringUtils: stringUtils, a: "Hello", b: "World", expectedResult: "HelloWorld")
+        performConcatenationTest(stringUtils: stringUtils, a: "Open", b: "AI", expectedResult: "OpenAI")
+        performConcatenationTest(stringUtils: stringUtils, a: "", b: "Test", expectedResult: "Test")
+    }
+    
+    func performConcatenationTest(stringUtils: StringUtils, a: String, b: String, expectedResult: String) {
+        // Act
+        let result = stringUtils.concatenate(a: a, b: b)
+        
+        // Assert
+        XCTAssertEqual(expectedResult, result)
+    }
+}
+```
+- Now that we've seen the other ways of doing it how about we jump right in and I show you how you can do it using XCTShark
+
+## Examples [How to use XCTShark]
 
 ```swift
 import XCTShark
+
+public class StringUtilsTests: XCTestCase {
+    @InlineData("Hello", "World", "HelloWorld")
+    @InlineData("Open", "AI", "OpenAI")
+    @InlineData("", "Test", "Test")
+    func testConcatenate(a: String, b: String, expectedResult: String) throws {
+        // Arrange
+        let stringUtils = StringUtils()
+        
+        // Act
+        let result = stringUtils.concatenate(a: a, b: b)
+        
+        // Assert
+        XCTAssertEqual(expectedResult, result)
+    }
+}
 ```
 
-## Examples
+- The above will result in the follow macros being created
+```swift
+    func testConcatenate_Test_Test() throws {
+        let a: String = ""
+        let b: String = "Test"
+        let expectedResult: String = "Test"
+
+        let stringUtils = StringUtils()
+        let result = stringUtils.concatenate(a: a, b: b)
+        XCTAssertEqual(expectedResult, result)
+    }
+    func testConcatenate_Open_Ai_Openai() throws {
+        let a: String = "Open"
+        let b: String = "AI"
+        let expectedResult: String = "OpenAI"
+
+        let stringUtils = StringUtils()
+        let result = stringUtils.concatenate(a: a, b: b)
+        XCTAssertEqual(expectedResult, result)
+    }
+    func testConcatenate_HelloWorld() throws {
+        let a: String = "Hello"
+        let b: String = "World"
+        let expectedResult: String = "HelloWorld"
+
+        let stringUtils = StringUtils()
+        let result = stringUtils.concatenate(a: a, b: b)
+        XCTAssertEqual(expectedResult, result)
+    }
+```
+
+- If you would like to give the method a specific name as long strings could end up giving the method name an unreadable name.
+```swift
+import XCTShark
+
+public class StringUtilsTests: XCTestCase {
+    @InlineData("Hello", "World", "HelloWorld", label: "_Verify_HelloWorld")
+    func testConcatenate(a: String, b: String, expectedResult: String) throws {
+        // Arrange
+        let stringUtils = StringUtils()
+        
+        // Act
+        let result = stringUtils.concatenate(a: a, b: b)
+        
+        // Assert
+        XCTAssertEqual(expectedResult, result)
+    }
+}
+```
+- The above will result in the follow macro being created
+```swift
+    func testConcatenate_Verify_HelloWorld() throws {
+        let a: String = "Hello"
+        let b: String = "World"
+        let expectedResult: String = "HelloWorld"
+
+        let stringUtils = StringUtils()
+        let result = stringUtils.concatenate(a: a, b: b)
+        XCTAssertEqual(expectedResult, result)
+    }
+```
