@@ -42,7 +42,7 @@ final class XCTSharkMacroFactory {
         for paramIndex in 0 ..< macroParameters.count {
             let name = functionParameters[paramIndex].getName()
             let type = functionParameters[paramIndex].getType()
-            let value = macroParameters[paramIndex].getValue()
+            let value = macroParameters[paramIndex].getValue(escapeString: true)
             
             parameters.append("let \(name): \(type) = \(value)")
         }

@@ -30,6 +30,26 @@ final class XCTSharkFunctionNamesTests: XCTSharkBaseTests {
         )
     }
     
+    func testInlineDataParametersEmptyStrings() throws {
+        assertMacroExpansion(
+            """
+            
+            @InlineData("", "Test")
+            func testingMethod(value: String, value2: String) { }
+            
+            """,
+            expandedSource:  """
+            func testingMethod(value: String, value2: String) { }
+
+            func testingMethod_Test() {
+                let value: String = ""
+                let value2: String = "Test"
+            }
+            """,
+            macros: testMacros
+        )
+    }
+    
     func testInlineDataMemberName() throws {
         assertMacroExpansion(
             """

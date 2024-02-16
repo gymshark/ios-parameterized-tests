@@ -29,11 +29,15 @@ struct MacroParameter: ParameterProtocol {
         return name
     }
     
-    func getValue() -> String {
+    func getValue(escapeString: Bool = false) -> String {
         guard let value = value else {
             return ""
         }
 
-        return value
+        if escapeString {
+            return value
+        }
+        
+        return value.replacingOccurrences(of: "\"\"", with: "")
     }
 }

@@ -16,11 +16,15 @@ protocol ParameterProtocol {
 
     func getType() -> Any
     func getName() -> String
-    func getValue() -> String
+    func getValue(escapeString: Bool) -> String
 }
 
 extension ParameterProtocol {
     init(type: Any, name: String? = nil, value: String? = nil) {
         self.init(type: type, name: name, value: value)
+    }
+    
+    func getValue(escapeString: Bool = false) -> String {
+        return self.getValue(escapeString: escapeString)
     }
 }

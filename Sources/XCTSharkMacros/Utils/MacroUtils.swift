@@ -13,8 +13,12 @@ final class MacroUtils {
     static func getFunctionSuffix(_ parameters: [ParameterProtocol]) -> String {
         var result = ""
         
-        result = parameters.map { prm in
+        result = parameters.compactMap { prm in
             let parameter = prm as! MacroParameter
+            
+            if parameter.getValue().isEmpty {
+                return nil
+            }
             
             return self.getFunctionSuffixUsingValue(parameter: parameter)
         }.joined(separator: "_")
@@ -23,17 +27,12 @@ final class MacroUtils {
     }
     
     private static func getFunctionSuffixUsingValue(parameter: MacroParameter) -> String {
-        guard let value = parameter.value else {
-            return ""
-        }
-        
-        return value
+        return parameter.getValue()
             .getValueAfterColon()
             .replaceCharactersWithUnderscores()
             .singleUnderscore()
             .removeLeadingUnderscores()
             .removeTrailingUnderscores()
-            .capitalized
     }
 }
 
