@@ -22,7 +22,7 @@ final class XCTSharkReturnTypeTests: XCTSharkBaseTests {
 
             func testingMethod(value: String) throws { }
 
-            func testingMethod_Hello() throws {
+            func testingMethod_hello() throws {
                 let value: String = "hello"
             }
             """,
@@ -42,7 +42,7 @@ final class XCTSharkReturnTypeTests: XCTSharkBaseTests {
 
             func testingMethod(value: String) async throws { }
 
-            func testingMethod_Hello() async throws {
+            func testingMethod_hello() async throws {
                 let value: String = "hello"
             }
             """,
@@ -65,7 +65,7 @@ final class XCTSharkReturnTypeTests: XCTSharkBaseTests {
                 return ""
             }
 
-            func testingMethod_Hello() -> String {
+            func testingMethod_hello() -> String {
                 let value: String = "hello"
 
                 return ""
@@ -90,7 +90,7 @@ final class XCTSharkReturnTypeTests: XCTSharkBaseTests {
                 return ""
             }
 
-            func testingMethod_Hello() throws -> String {
+            func testingMethod_hello() throws -> String {
                 let value: String = "hello"
 
                 return ""
@@ -115,7 +115,7 @@ final class XCTSharkReturnTypeTests: XCTSharkBaseTests {
                 return ""
             }
 
-            func testingMethod_Hello() async -> String {
+            func testingMethod_hello() async -> String {
                 let value: String = "hello"
 
                 return ""
@@ -140,7 +140,7 @@ final class XCTSharkReturnTypeTests: XCTSharkBaseTests {
                 return ""
             }
 
-            func testingMethod_Hello() async throws -> String {
+            func testingMethod_hello() async throws -> String {
                 let value: String = "hello"
 
                 return ""
@@ -165,7 +165,7 @@ final class XCTSharkReturnTypeTests: XCTSharkBaseTests {
                 return nil
             }
 
-            func testingMethod_Hello() -> String? {
+            func testingMethod_hello() -> String? {
                 let value: String = "hello"
             
                 return nil
@@ -190,7 +190,7 @@ final class XCTSharkReturnTypeTests: XCTSharkBaseTests {
                 return value
             }
 
-            func testingMethod_Tolerance_Na() -> Tolerance? {
+            func testingMethod_Tolerance_na() -> Tolerance? {
                 let value: Tolerance = Tolerance.na
             
                 return value
@@ -216,7 +216,7 @@ final class XCTSharkReturnTypeTests: XCTSharkBaseTests {
                 return URLError.cancelled
             }
 
-            func testingMethod_Hello() -> URLError {
+            func testingMethod_hello() -> URLError {
                 let value: String = "hello"
             
                 return URLError.cancelled
@@ -242,7 +242,7 @@ final class XCTSharkReturnTypeTests: XCTSharkBaseTests {
                 return URLRequest(url: URL(string: "www.gymshark.com"))
             }
 
-            func testingMethod_Hello() -> URLRequest {
+            func testingMethod_hello() -> URLRequest {
                 let value: String = "hello"
             
                 return URLRequest(url: URL(string: "www.gymshark.com"))

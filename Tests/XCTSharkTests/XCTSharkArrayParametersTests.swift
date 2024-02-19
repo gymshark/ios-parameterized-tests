@@ -21,8 +21,84 @@ final class XCTSharkArrayParametersTests: XCTSharkBaseTests {
             expandedSource:  """
             func testingMethod(values: [String]) { }
 
-            func testingMethod_Hello_World_2_Tolerance_Na() {
+            func testingMethod_Hello_World_2_Tolerance_na() {
                 let values: [String] = ["Hello World", "2", "Tolerance.na"]
+            }
+            """,
+            macros: testMacros
+        )
+    }
+    
+    func testInlineDataArrayIntValue() throws {
+        assertMacroExpansion(
+            """
+            
+            @InlineData([2, 3, 5])
+            func testingMethod(values: [Int]) { }
+            
+            """,
+            expandedSource:  """
+            func testingMethod(values: [Int]) { }
+
+            func testingMethod_2_3_5() {
+                let values: [Int] = [2, 3, 5]
+            }
+            """,
+            macros: testMacros
+        )
+    }
+    
+    func testInlineDataArrayBoolValue() throws {
+        assertMacroExpansion(
+            """
+            
+            @InlineData([false, true])
+            func testingMethod(values: [Bool]) { }
+            
+            """,
+            expandedSource:  """
+            func testingMethod(values: [Bool]) { }
+
+            func testingMethod_false_true() {
+                let values: [Bool] = [false, true]
+            }
+            """,
+            macros: testMacros
+        )
+    }
+    
+    func testInlineDataArrayFloatValue() throws {
+        assertMacroExpansion(
+            """
+            
+            @InlineData([5.0, 6.0])
+            func testingMethod(values: [Float]) { }
+            
+            """,
+            expandedSource:  """
+            func testingMethod(values: [Float]) { }
+
+            func testingMethod_5_0_6_0() {
+                let values: [Float] = [5.0, 6.0]
+            }
+            """,
+            macros: testMacros
+        )
+    }
+    
+    func testInlineDataArrayDoubleValue() throws {
+        assertMacroExpansion(
+            """
+            
+            @InlineData([3.51, 5.51])
+            func testingMethod(values: [Double]) { }
+            
+            """,
+            expandedSource:  """
+            func testingMethod(values: [Double]) { }
+
+            func testingMethod_3_51_5_51() {
+                let values: [Double] = [3.51, 5.51]
             }
             """,
             macros: testMacros
@@ -40,7 +116,7 @@ final class XCTSharkArrayParametersTests: XCTSharkBaseTests {
             expandedSource:  """
             func testingMethod(tolerance: [Tolerance]) { }
 
-            func testingMethod_Tolerance_Na_Tolerance_Sku_Tolerance_Script() {
+            func testingMethod_Tolerance_na_Tolerance_sku_Tolerance_script() {
                 let tolerance: [Tolerance] = [Tolerance.na, Tolerance.sku, Tolerance.script]
             }
             """,
@@ -59,7 +135,7 @@ final class XCTSharkArrayParametersTests: XCTSharkBaseTests {
             expandedSource:  """
             func testingMethod(httpError: [HTTPError]) { }
 
-            func testingMethod_Httperror_Cancelled_Httperror_Invalid() {
+            func testingMethod_HTTPError_cancelled_HTTPError_invalid() {
                 let httpError: [HTTPError] = [HTTPError.cancelled, HTTPError.invalid]
             }
             """,
@@ -78,7 +154,7 @@ final class XCTSharkArrayParametersTests: XCTSharkBaseTests {
             expandedSource:  """
             func testingMethod(urlRequests: [URLRequest]) { }
 
-            func testingMethod_Gymshark_Com_Google_Com_Placeholder_Com() {
+            func testingMethod_gymshark_com_google_com_placeholder_com() {
                 let urlRequests: [URLRequest] = [URLRequest(url: URL(string: "www.gymshark.com")!), URLRequest(url: URL(string: "www.google.com")!), URLRequest(url: URL(string: "www.placeholder.com")!)]
             }
             """,
@@ -126,7 +202,7 @@ final class XCTSharkArrayParametersTests: XCTSharkBaseTests {
             expandedSource:  """
             func testingMethod(urlRequests: [String]) { }
 
-            func testingMethod_Sizeinstock_Features_Canonicalcolour_Fit() {
+            func testingMethod_sizeInStock_features_canonicalColour_fit() {
                 let urlRequests: [String] = ["sizeInStock",
                           "features",
                           "canonicalColour",
@@ -134,7 +210,7 @@ final class XCTSharkArrayParametersTests: XCTSharkBaseTests {
                 ]
             }
 
-            func testingMethod_Fit_Price_Genderedcollections_Discountpercentage_Patterntype() {
+            func testingMethod_fit_price_genderedCollections_discountPercentage_patternType() {
                 let urlRequests: [String] = ["fit",
                          "price",
                          "genderedCollections",

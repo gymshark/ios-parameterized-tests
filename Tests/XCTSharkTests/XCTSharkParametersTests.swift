@@ -21,7 +21,7 @@ final class XCTSharkParametersTests: XCTSharkBaseTests {
             expandedSource: """
             func testingMethod(tolerance: Tolerance) { }
             
-            func testingMethod_Tolerance_Na() {
+            func testingMethod_Tolerance_na() {
                 let tolerance: Tolerance = Tolerance.na
             }
             """,
@@ -40,7 +40,7 @@ final class XCTSharkParametersTests: XCTSharkBaseTests {
             expandedSource: """
             func testingMethod(tolerance: Tolerance, value: String) { }
             
-            func testingMethod_Tolerance_Na_Na() {
+            func testingMethod_Tolerance_na_na() {
                 let tolerance: Tolerance = Tolerance.na
                 let value: String = "na"
             }
@@ -60,7 +60,7 @@ final class XCTSharkParametersTests: XCTSharkBaseTests {
             expandedSource:  """
             func testingMethod(url: URLRequest) { }
 
-            func testingMethod_Google_Com() {
+            func testingMethod_google_com() {
                 let url: URLRequest = URLRequest(url: URL(string: "www.google.com")!)
             }
             """,
@@ -80,13 +80,13 @@ final class XCTSharkParametersTests: XCTSharkBaseTests {
             expandedSource:  """
             func testingMethod(value: String, int: Int, tolerance: Tolerance) { }
 
-            func testingMethod_Hello_World_2_Tolerance_Na() {
+            func testingMethod_Hello_World_2_Tolerance_na() {
                 let value: String = "Hello World"
                 let int: Int = 2
                 let tolerance: Tolerance = Tolerance.na
             }
             
-            func testingMethod_Gymshark_69_Tolerance_Sku() {
+            func testingMethod_Gymshark_69_Tolerance_sku() {
                 let value: String = "Gymshark"
                 let int: Int = 69
                 let tolerance: Tolerance = Tolerance.sku

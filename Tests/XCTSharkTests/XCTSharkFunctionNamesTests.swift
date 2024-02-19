@@ -22,7 +22,7 @@ final class XCTSharkFunctionNamesTests: XCTSharkBaseTests {
             expandedSource:  """
             func testingMethod(value: String) { }
 
-            func testingMethod_Hello() {
+            func testingMethod_hello() {
                 let value: String = "hello"
             }
             """,
@@ -61,7 +61,7 @@ final class XCTSharkFunctionNamesTests: XCTSharkBaseTests {
             expandedSource:  """
             func testingMethod(value: Tolerance) { }
 
-            func testingMethod_Tolerance_Na() {
+            func testingMethod_Tolerance_na() {
                 let value: Tolerance = Tolerance.na
             }
             """,
@@ -80,7 +80,7 @@ final class XCTSharkFunctionNamesTests: XCTSharkBaseTests {
             expandedSource:  """
             func testingMethod(value: URLRequest) { }
 
-            func testingMethod_Gymshark_Com() {
+            func testingMethod_gymshark_com() {
                 let value: URLRequest = URLRequest(url: URL(string: "www.gymshark.com")!)
             }
             """,

@@ -64,10 +64,7 @@ extension MacroUtils {
     }
     
     func getStringExpression(_ label: LabeledExprSyntax?) -> ParameterProtocol? {
-        
-        let string = StringLiteralExprSyntax(label?.expression)
-        
-        guard let string = string else {
+        guard let string = StringLiteralExprSyntax(label?.expression) else {
             return nil
         }
         
@@ -75,14 +72,35 @@ extension MacroUtils {
     }
     
     func getIntExpression(_ label: LabeledExprSyntax?) -> ParameterProtocol? {
-        
-        let int = IntegerLiteralExprSyntax(label?.expression)
-        
-        guard let int = int else {
+        guard let int = IntegerLiteralExprSyntax(label?.expression) else {
             return nil
         }
         
         return MacroParameter(type: "Int", value: int.trimmedDescription)
+    }
+    
+    func getFloatExpression(_ label: LabeledExprSyntax?) -> ParameterProtocol? {
+        guard let float = FloatLiteralExprSyntax(label?.expression) else {
+            return nil
+        }
+        
+        return MacroParameter(type: "Float", value: float.trimmedDescription)
+    }
+    
+    func getBooleanExpression(_ label: LabeledExprSyntax?) -> ParameterProtocol? {
+        guard let bool = BooleanLiteralExprSyntax(label?.expression) else {
+            return nil
+        }
+        
+        return MacroParameter(type: "Bool", value: bool.trimmedDescription)
+    }
+    
+    func getNilExpression(_ label: LabeledExprSyntax?) -> ParameterProtocol? {
+        guard let nilVal = NilLiteralExprSyntax(label?.expression) else {
+            return nil
+        }
+        
+        return MacroParameter(type: "nil", value: nilVal.trimmedDescription)
     }
     
     func getForceUnwrapExpression(_ label: LabeledExprSyntax?) -> ParameterProtocol? {
@@ -126,19 +144,35 @@ extension MacroUtils {
         }
         
         let parameters = arguments.compactMap { prm in
-            let string = MacroUtils().getStringExpression(prm)
-            let int = MacroUtils().getIntExpression(prm)
-            let member = MacroUtils().getMemberExpression(prm)
-            let function = MacroUtils().getFunctionExpression(prm)
-            let unwrap = MacroUtils().getForceUnwrapExpression(prm)
-            let array = MacroUtils().getArrayExpression(prm)
+            if let value = MacroUtils().getStringExpression(prm) {
+                return value
+            }
+            if let value = MacroUtils().getIntExpression(prm) {
+                return value
+            }
+            if let value = MacroUtils().getBooleanExpression(prm) {
+                return value
+            }
+            if let value = MacroUtils().getFloatExpression(prm) {
+                return value
+            }
+            if let value = MacroUtils().getMemberExpression(prm) {
+                return value
+            }
+            if let value = MacroUtils().getFunctionExpression(prm) {
+                return value
+            }
+            if let value = MacroUtils().getForceUnwrapExpression(prm) {
+                return value
+            }
+            if let value = MacroUtils().getArrayExpression(prm) {
+                return value
+            }
+            if let value = MacroUtils().getNilExpression(prm) {
+                return value
+            }
             
-            return string ??
-            int ??
-            member ??
-            function ??
-            unwrap ??
-            array
+            return nil
         }
         
         return parameters

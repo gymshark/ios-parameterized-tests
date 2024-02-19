@@ -22,7 +22,7 @@ final class XCTSharkFunctionTests: XCTSharkBaseTests {
             expandedSource:  """
             func testingMethod(value: String) { }
 
-            func testingMethod_Hello() {
+            func testingMethod_hello() {
                 let value: String = "hello"
             }
             """,
@@ -44,7 +44,7 @@ final class XCTSharkFunctionTests: XCTSharkBaseTests {
             expandedSource:  """
             func testingMethod(value: String) { }
 
-            func testingMethod_Hello() {
+            func testingMethod_hello() {
                 let value: String = "hello"
             }
             func methodTesting(value: String, int: Int) { }
